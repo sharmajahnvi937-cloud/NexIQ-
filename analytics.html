@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard | NEXIQ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" style="background: rgba(10, 10, 26, 0.95); border-bottom: 1px solid var(--clr-border);">
+    <div class="container-lg flex justify-between items-center">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">N</div>
+        NEXIQ
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-icon btn-ghost"><i data-lucide="download"></i></button>
+        <button class="btn btn-icon btn-ghost"><i data-lucide="bell"></i></button>
+        <div class="profile-avatar" style="width: 36px; height: 36px; font-size: 14px; margin-left: 12px; cursor: pointer;">AD</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <a href="index.html" class="sidebar-link">
+          <i data-lucide="layout-dashboard" class="link-icon"></i> Main Site
+        </a>
+        <a href="analytics.html" class="sidebar-link active">
+          <i data-lucide="bar-chart-2" class="link-icon"></i> Analytics
+        </a>
+        <a href="ai-modules.html" class="sidebar-link">
+          <i data-lucide="cpu" class="link-icon"></i> AI Modules
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Reports</div>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="trending-up" class="link-icon"></i> Performance
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="activity" class="link-icon"></i> Growth
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="shield" class="link-icon"></i> Trust Scores
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Previews</div>
+        <a href="brand-dashboard.html" class="sidebar-link">
+          <i data-lucide="briefcase" class="link-icon"></i> Brand View
+        </a>
+        <a href="creator-dashboard.html" class="sidebar-link">
+          <i data-lucide="camera" class="link-icon"></i> Creator View
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="container-lg">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h1 class="text-3xl font-bold mb-2" style="font-family: var(--font-heading);">Analytics Dashboard</h1>
+            <p class="text-secondary">Comprehensive platform insights and performance metrics</p>
+          </div>
+          <div class="flex gap-2 bg-surface p-1 rounded-md" style="background: rgba(255,255,255,0.05);">
+            <button class="btn btn-sm btn-ghost">All Time</button>
+            <button class="btn btn-sm btn-primary">This Year</button>
+            <button class="btn btn-sm btn-ghost">This Quarter</button>
+            <button class="btn btn-sm btn-ghost">This Month</button>
+          </div>
+        </div>
+
+        <!-- Stats Overview Row -->
+        <div class="grid grid-4 gap-6 mb-8">
+          <div class="stat-card animate-fade-up" data-delay="0">
+            <div class="stat-icon amber">💰</div>
+            <div class="stat-value">$48M+</div>
+            <div class="stat-label">Total Revenue Generated</div>
+            <div class="stat-change positive">↑ 24.0%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="1">
+            <div class="stat-icon teal">🚀</div>
+            <div class="stat-value">320</div>
+            <div class="stat-label">Active Campaigns</div>
+            <div class="stat-change positive">↑ 15.0%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="2">
+            <div class="stat-icon purple">🛡️</div>
+            <div class="stat-value">87.5</div>
+            <div class="stat-label">Avg Trust Score</div>
+            <div class="stat-change positive">↑ 3.2%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="3">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Overall Success Rate</div>
+            <div class="stat-change positive">↑ 5.1%</div>
+          </div>
+        </div>
+
+        <!-- Main Chart: Platform Growth -->
+        <div class="card mb-8 animate-fade-up" data-delay="1">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold" style="font-family: var(--font-heading);">Platform Growth (2025)</h3>
+          </div>
+          <div class="chart-wrapper" style="height: 350px;">
+            <canvas id="platformGrowthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Grid Row 1 -->
+        <div class="grid grid-2 gap-6 mb-8">
+          <!-- Category Distribution -->
+          <div class="card animate-fade-up" data-delay="2">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Category Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- ROI by Category -->
+          <div class="card animate-fade-up" data-delay="3">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Average ROI by Category (%)</h3>
+            <div class="chart-wrapper">
+              <canvas id="roiByCategoryChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid Row 2 -->
+        <div class="grid grid-2 gap-6 mb-8">
+          <!-- Monthly Revenue -->
+          <div class="card animate-fade-up" data-delay="4">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Monthly Platform Revenue ($)</h3>
+            <div class="chart-wrapper">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- Engagement Trends -->
+          <div class="card animate-fade-up" data-delay="5">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Engagement Rate Trends (%)</h3>
+            <div class="chart-wrapper">
+              <canvas id="engagementTrendsChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid Row 3 -->
+        <div class="grid grid-2 gap-6 mb-8">
+          <!-- Trust Distribution -->
+          <div class="card animate-fade-up" data-delay="6">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Trust Score Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="trustDistChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- Campaign Perf -->
+          <div class="card animate-fade-up" data-delay="7">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Campaign Outcome Breakdown</h3>
+            <div class="chart-wrapper">
+              <canvas id="campaignPerfChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROI Forecasting (Full Width) -->
+        <div class="card mb-8 animate-fade-up" data-delay="8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold" style="font-family: var(--font-heading);">ROI Forecasting (Next 6 Months Projection)</h3>
+            <span class="badge badge-primary">Powered by AI Module #7</span>
+          </div>
+          <div class="chart-wrapper" style="height: 300px;">
+            <canvas id="roiForecastChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Top Performers Tables -->
+        <div class="grid grid-2 gap-6 mb-8">
+          <div class="card animate-fade-up" data-delay="9">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Top Creators (by ROI)</h3>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Creator</th>
+                    <th>Niche</th>
+                    <th>Trust</th>
+                    <th>Avg ROI</th>
+                  </tr>
+                </thead>
+                <tbody id="topCreatorsBody">
+                  <!-- JS injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="card animate-fade-up" data-delay="10">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Top Brands (by Success)</h3>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Trust</th>
+                    <th>Campaigns</th>
+                  </tr>
+                </thead>
+                <tbody id="topBrandsBody">
+                  <!-- JS injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setChartDefaults();
+      const aData = NEXIQ_DATA.analytics;
+
+      // 1. Platform Growth
+      createLineChart('platformGrowthChart', {
+        labels: aData.platformGrowth.labels,
+        datasets: [
+          { label: 'Creators', data: aData.platformGrowth.creators, color: CHART_COLORS.primary },
+          { label: 'Brands', data: aData.platformGrowth.brands, color: CHART_COLORS.secondary },
+          { label: 'Campaigns', data: aData.platformGrowth.campaigns, color: CHART_COLORS.accent }
+        ],
+        fill: false
+      });
+
+      // 2. Category Distribution
+      createDoughnutChart('categoryChart', {
+        labels: aData.categoryDistribution.labels,
+        data: aData.categoryDistribution.data,
+        cutout: '70%'
+      });
+
+      // 3. ROI by Category
+      createBarChart('roiByCategoryChart', {
+        labels: aData.roiByCategory.labels,
+        datasets: [{
+          label: 'Average ROI (%)',
+          data: aData.roiByCategory.data,
+          color: CHART_COLORS.primary
+        }],
+        horizontal: true
+      });
+
+      // 4. Monthly Revenue
+      const revCtx = document.getElementById('revenueChart').getContext('2d');
+      const gradient = revCtx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgba(0, 206, 201, 0.8)');
+      gradient.addColorStop(1, 'rgba(108, 92, 231, 0.2)');
+      
+      new Chart(revCtx, {
+        type: 'bar',
+        data: {
+          labels: aData.monthlyRevenue.labels,
+          datasets: [{
+            label: 'Revenue ($)',
+            data: aData.monthlyRevenue.data,
+            backgroundColor: gradient,
+            borderColor: '#00CEC9',
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      // 5. Engagement Trends
+      createLineChart('engagementTrendsChart', {
+        labels: aData.engagementTrends.labels,
+        datasets: [
+          { label: 'Instagram', data: aData.engagementTrends.instagram, color: CHART_COLORS.accent },
+          { label: 'YouTube', data: aData.engagementTrends.youtube, color: CHART_COLORS.danger },
+          { label: 'TikTok', data: aData.engagementTrends.tiktok, color: CHART_COLORS.secondary }
+        ],
+        fill: false
+      });
+
+      // 6. Trust Distribution
+      createPolarChart('trustDistChart', {
+        labels: aData.trustScoreDistribution.labels,
+        data: aData.trustScoreDistribution.data
+      });
+
+      // 7. Campaign Performance Stacked
+      createBarChart('campaignPerfChart', {
+        labels: aData.campaignPerformance.labels,
+        datasets: [
+          { label: 'Successful', data: aData.campaignPerformance.successful, color: CHART_COLORS.success },
+          { label: 'Partial', data: aData.campaignPerformance.partial, color: CHART_COLORS.warning },
+          { label: 'Failed', data: aData.campaignPerformance.failed, color: CHART_COLORS.danger }
+        ],
+        stacked: true
+      });
+
+      // 8. ROI Forecasting (Custom dataset structure with dashed line)
+      const forecastCtx = document.getElementById('roiForecastChart');
+      new Chart(forecastCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec', 'Jan(P)', 'Feb(P)', 'Mar(P)', 'Apr(P)', 'May(P)', 'Jun(P)'],
+          datasets: [
+            {
+              label: 'Actual ROI',
+              data: [310, 315, 320, 318, 325, 330, 335, 342, 340, 345, 350, 355, null, null, null, null, null, null],
+              borderColor: '#6C5CE7',
+              backgroundColor: 'rgba(108, 92, 231, 0.1)',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Projected ROI',
+              data: [null, null, null, null, null, null, null, null, null, null, null, 355, 362, 368, 375, 382, 390, 395],
+              borderColor: '#00CEC9',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.4
+            }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      // Populate Tables
+      const creatorTbody = document.getElementById('topCreatorsBody');
+      NEXIQ_DATA.creators.forEach(c => {
+        creatorTbody.innerHTML += `
+          <tr>
+            <td class="font-medium flex items-center gap-2">
+              <div class="profile-avatar" style="width: 24px; height: 24px; font-size: 10px; border-radius: 4px;">${c.avatar}</div>
+              ${c.name}
+            </td>
+            <td class="text-secondary">${c.niche}</td>
+            <td><span class="badge badge-success">${c.audienceTrustScore}</span></td>
+            <td class="text-primary font-semibold">${c.avgROI}%</td>
+          </tr>
+        `;
+      });
+
+      const brandTbody = document.getElementById('topBrandsBody');
+      NEXIQ_DATA.brands.forEach(b => {
+        brandTbody.innerHTML += `
+          <tr>
+            <td class="font-medium flex items-center gap-2">
+              <div class="profile-avatar" style="width: 24px; height: 24px; font-size: 10px; border-radius: 4px;">${b.logo}</div>
+              ${b.name}
+            </td>
+            <td class="text-secondary">${b.category}</td>
+            <td><span class="badge badge-success">${b.trustScore}</span></td>
+            <td class="text-primary font-semibold">${b.campaigns.successful}/${b.campaigns.total}</td>
+          </tr>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

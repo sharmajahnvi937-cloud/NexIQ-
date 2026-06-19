@@ -1,0 +1,16 @@
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.directory
+
+# Temp/Cache files
+*.log
+*.tmp
+.vs/
+.idea/
+.vscode/
+node_modules/
+dist/
+build/

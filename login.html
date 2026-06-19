@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | NEXIQ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+
+  <div class="auth-page">
+    <div class="auth-card" data-animate>
+      
+      <div class="flex justify-center" style="margin-bottom: 24px;">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-icon">N</div>
+          NEXIQ
+        </a>
+      </div>
+
+      <div class="auth-header">
+        <h2 id="auth-title">Welcome Back</h2>
+        <p id="auth-subtitle">Log in to access your dashboard</p>
+      </div>
+
+      <div class="auth-toggle">
+        <button id="btn-login" class="active" onclick="switchTab('login')">Login</button>
+        <button id="btn-signup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <div class="role-selector">
+        <div class="role-option selected" id="role-brand" onclick="selectRole('brand')">
+          <div class="role-icon">🏢</div>
+          <div class="role-name">I'm a Brand</div>
+        </div>
+        <div class="role-option" id="role-creator" onclick="selectRole('creator')">
+          <div class="role-icon">🎨</div>
+          <div class="role-name">I'm a Creator</div>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleAuth(event, 'login')">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <div class="flex justify-between items-center mb-2">
+            <label class="form-label" style="margin: 0;">Password</label>
+            <a href="#" class="text-xs text-primary">Forgot Password?</a>
+          </div>
+          <input type="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-full justify-center" style="width: 100%; padding: 12px; margin-top: 16px;">
+          Log In
+        </button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signup-form" class="hidden" onsubmit="handleAuth(event, 'signup')">
+        <div class="form-group">
+          <label class="form-label">Full Name / Company Name</label>
+          <input type="text" class="form-input" placeholder="Acme Corp" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Create a strong password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-full justify-center" style="width: 100%; padding: 12px; margin-top: 16px;">
+          Create Account
+        </button>
+      </form>
+
+      <div class="divider">or continue with</div>
+
+      <div class="grid grid-2 gap-3">
+        <button class="btn btn-secondary w-full justify-center">
+          <i data-lucide="chrome" style="width: 18px; height: 18px;"></i> Google
+        </button>
+        <button class="btn btn-secondary w-full justify-center">
+          <i data-lucide="github" style="width: 18px; height: 18px;"></i> GitHub
+        </button>
+      </div>
+
+      <p class="text-center text-sm text-secondary" style="margin-top: 24px;">
+        By continuing, you agree to our <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>.
+      </p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    lucide.createIcons();
+
+    let currentMode = 'login';
+    let currentRole = 'brand';
+
+    function switchTab(mode) {
+      currentMode = mode;
+      
+      document.getElementById('btn-login').classList.toggle('active', mode === 'login');
+      document.getElementById('btn-signup').classList.toggle('active', mode === 'signup');
+      
+      document.getElementById('login-form').classList.toggle('hidden', mode !== 'login');
+      document.getElementById('signup-form').classList.toggle('hidden', mode !== 'signup');
+      
+      document.getElementById('auth-title').textContent = mode === 'login' ? 'Welcome Back' : 'Create an Account';
+      document.getElementById('auth-subtitle').textContent = mode === 'login' ? 'Log in to access your dashboard' : 'Join the transparent ecosystem';
+    }
+
+    function selectRole(role) {
+      currentRole = role;
+      document.getElementById('role-brand').classList.toggle('selected', role === 'brand');
+      document.getElementById('role-creator').classList.toggle('selected', role === 'creator');
+    }
+
+    function handleAuth(e, mode) {
+      e.preventDefault();
+      
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'Authenticating...';
+      btn.style.opacity = '0.8';
+      
+      showToast(mode === 'login' ? 'Logging in successfully...' : 'Account created successfully!', 'success');
+      
+      setTimeout(() => {
+        const dest = currentRole === 'brand' ? 'brand-dashboard.html' : 'creator-dashboard.html';
+        window.location.href = dest;
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

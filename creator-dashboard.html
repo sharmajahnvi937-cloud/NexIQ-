@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Dashboard | NEXIQ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" style="background: rgba(10, 10, 26, 0.95); border-bottom: 1px solid var(--clr-border);">
+    <div class="container-lg flex justify-between items-center">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">N</div>
+        NEXIQ
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-icon btn-ghost"><i data-lucide="bell"></i></button>
+        <button class="btn btn-icon btn-ghost"><i data-lucide="search"></i></button>
+        <div class="profile-avatar" style="width: 36px; height: 36px; font-size: 14px; margin-left: 12px; background: var(--grad-accent); cursor: pointer;">SC</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <a href="creator-dashboard.html" class="sidebar-link active">
+          <i data-lucide="layout-dashboard" class="link-icon"></i> Dashboard
+        </a>
+        <a href="analytics.html" class="sidebar-link">
+          <i data-lucide="bar-chart-2" class="link-icon"></i> Analytics
+        </a>
+        <a href="ai-modules.html" class="sidebar-link">
+          <i data-lucide="cpu" class="link-icon"></i> AI Modules
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Content</div>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="image" class="link-icon"></i> Portfolio
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="users" class="link-icon"></i> Collaborations
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="target" class="link-icon"></i> Campaigns
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Settings</div>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="settings" class="link-icon"></i> Profile
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="dollar-sign" class="link-icon"></i> Earnings
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="container-lg">
+        
+        <!-- Profile Header -->
+        <div class="profile-header animate-fade-in" style="border-color: rgba(253, 121, 168, 0.3);">
+          <div class="profile-info">
+            <div class="profile-avatar" style="background: var(--grad-accent);">SC</div>
+            <div class="profile-details">
+              <h2>Sarah Chen</h2>
+              <div class="profile-tagline">Beauty & lifestyle content creator with 2M+ engaged followers</div>
+              <div class="profile-tags">
+                <span class="badge badge-accent">Beauty & Lifestyle</span>
+                <span class="badge badge-secondary"><i data-lucide="instagram" style="width: 12px; height: 12px;"></i> Instagram</span>
+                <span class="badge badge-danger"><i data-lucide="youtube" style="width: 12px; height: 12px;"></i> YouTube</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-stats">
+            <div class="stat">
+              <div class="stat-value text-accent">94</div>
+              <div class="stat-label">Reputation Score</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2.1M</div>
+              <div class="stat-label">Total Followers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value text-primary">6.8%</div>
+              <div class="stat-label">Engagement Rate</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value text-success">380%</div>
+              <div class="stat-label">Avg ROI Delivered</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="grid grid-4 gap-6 mb-8" style="margin-bottom: 2rem;">
+          <div class="stat-card animate-fade-up" data-delay="0">
+            <div class="stat-icon purple">⭐</div>
+            <div class="stat-value">94</div>
+            <div class="stat-label">Reputation Score</div>
+            <div class="stat-change positive">↑ 4.2%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="1">
+            <div class="stat-icon green">🛡️</div>
+            <div class="stat-value">91</div>
+            <div class="stat-label">Audience Trust</div>
+            <div class="stat-change positive">↑ 2.8%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="2">
+            <div class="stat-icon teal">🎯</div>
+            <div class="stat-value">4.2%</div>
+            <div class="stat-label">Conversion Rate</div>
+            <div class="stat-change positive">↑ 0.5%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="3">
+            <div class="stat-icon pink">📈</div>
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Campaign Success</div>
+            <div class="stat-change positive">↑ 3.5%</div>
+          </div>
+        </div>
+
+        <!-- Trust Score & ROI Row -->
+        <div class="grid grid-3 gap-6 mb-8" style="margin-bottom: 2rem;">
+          
+          <!-- Trust Score Section -->
+          <div class="card" style="grid-column: span 1;">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Audience Trust</h3>
+            </div>
+            
+            <div class="flex flex-col items-center mb-6">
+              <div class="trust-ring" id="trustRingCreator">
+                <svg viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="trustGradientCreator" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FD79A8" />
+                      <stop offset="100%" stop-color="#6C5CE7" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="ring-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="ring-fill" cx="50" cy="50" r="45" style="stroke: url(#trustGradientCreator)"></circle>
+                </svg>
+                <div class="ring-value">91</div>
+                <div class="ring-label">High Trust</div>
+              </div>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Comment Sentiment</span>
+                  <span class="font-semibold text-accent">94/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill accent" style="width: 0%" data-target="94"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Recommendation Follow-through</span>
+                  <span class="font-semibold">88/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="88"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Audience Retention</span>
+                  <span class="font-semibold text-success">92/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill teal" style="width: 0%" data-target="92"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Authenticity</span>
+                  <span class="font-semibold text-primary">96/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="96"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROI Chart -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">ROI Delivered to Brands</h3>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="roiChart"></canvas>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Charts Row 2 -->
+        <div class="grid grid-3 gap-6 mb-8" style="margin-bottom: 2rem;">
+          <div class="card" style="grid-column: span 2;">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Monthly Engagement Trends</h3>
+            <div class="chart-wrapper">
+              <canvas id="engagementChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Audience Demographics</h3>
+            <div class="chart-wrapper" style="height: 200px; min-height: 200px;">
+              <canvas id="demographicsChart"></canvas>
+            </div>
+            <div class="chart-wrapper mt-4" style="height: 150px; min-height: 150px;">
+              <canvas id="genderChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio & Collabs -->
+        <div class="grid grid-3 gap-6">
+          <div class="card flex flex-col gap-4">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Top Portfolio Items</h3>
+              <a href="#" class="text-xs text-accent">View all</a>
+            </div>
+            
+            <div id="portfolio-list" class="flex flex-col gap-3">
+              <!-- Populated by JS -->
+            </div>
+            
+            <div class="mt-4 p-4 rounded-lg" style="background: rgba(253, 121, 168, 0.05); border: 1px solid rgba(253, 121, 168, 0.2);">
+              <div class="text-sm text-secondary mb-1">Follower-to-View Ratio</div>
+              <div class="text-2xl font-bold text-accent mb-2">0.42 <span class="text-xs font-normal badge badge-success">Top 5%</span></div>
+              <div class="progress-bar"><div class="progress-fill accent" style="width: 85%"></div></div>
+            </div>
+          </div>
+          
+          <div class="card" style="grid-column: span 2;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Recent Collaborations</h3>
+              <a href="#" class="btn btn-sm btn-secondary">Download Report</a>
+            </div>
+            
+            <div class="table-wrapper">
+              <table class="data-table" id="creatorCollabTable">
+                <thead>
+                  <tr>
+                    <th>Brand</th>
+                    <th>Campaign</th>
+                    <th>ROI Delivered</th>
+                    <th>Rating</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setChartDefaults();
+      const creator = NEXIQ_DATA.creators[0];
+
+      // Init Trust Ring
+      animateTrustRing(document.getElementById('trustRingCreator'), creator.audienceTrustScore);
+      
+      // Init Progress Bars
+      document.querySelectorAll('.progress-fill').forEach(bar => {
+        const target = bar.getAttribute('data-target');
+        if(target) { setTimeout(() => { bar.style.width = target + '%'; }, 300); }
+      });
+
+      // 1. ROI Chart
+      const roiCtx = document.getElementById('roiChart');
+      if (roiCtx) {
+        new Chart(roiCtx, {
+          type: 'bar',
+          data: {
+            labels: creator.roiHistory.labels,
+            datasets: [{
+              label: 'ROI (%)',
+              data: creator.roiHistory.values,
+              backgroundColor: ['#6C5CE7', '#00CEC9', '#FD79A8', '#FDCB6E', '#00B894', '#74b9ff'],
+              borderRadius: 6
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      // 2. Engagement Trends
+      const engCtx = document.getElementById('engagementChart');
+      if (engCtx) {
+        new Chart(engCtx, {
+          type: 'line',
+          data: {
+            labels: creator.monthlyEngagement.labels,
+            datasets: [
+              { label: 'Likes', data: creator.monthlyEngagement.likes, borderColor: '#FD79A8', tension: 0.4 },
+              { label: 'Comments', data: creator.monthlyEngagement.comments, borderColor: '#00CEC9', tension: 0.4 },
+              { label: 'Shares', data: creator.monthlyEngagement.shares, borderColor: '#FDCB6E', tension: 0.4 }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 3. Demographics Doughnut
+      const demoCtx = document.getElementById('demographicsChart');
+      if (demoCtx) {
+        new Chart(demoCtx, {
+          type: 'doughnut',
+          data: {
+            labels: creator.audienceDemographics.labels,
+            datasets: [{
+              data: creator.audienceDemographics.data,
+              backgroundColor: ['#6C5CE7', '#00CEC9', '#FD79A8', '#FDCB6E'],
+              borderWidth: 0
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        });
+      }
+      
+      // 4. Gender Pie
+      const genderCtx = document.getElementById('genderChart');
+      if (genderCtx) {
+        new Chart(genderCtx, {
+          type: 'pie',
+          data: {
+            labels: creator.audienceGender.labels,
+            datasets: [{
+              data: creator.audienceGender.data,
+              backgroundColor: ['#FD79A8', '#74b9ff', '#A0A0B8'],
+              borderWidth: 0
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        });
+      }
+
+      // Populate Portfolio
+      const portList = document.getElementById('portfolio-list');
+      creator.portfolio.slice(0, 3).forEach(item => {
+        portList.innerHTML += `
+          <div class="p-3 rounded-md" style="background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border);">
+            <div class="font-medium text-sm mb-1 truncate">${item.title}</div>
+            <div class="flex justify-between items-center text-xs text-secondary">
+              <span class="flex items-center gap-1"><i data-lucide="eye" style="width: 12px; height: 12px;"></i> ${(item.views/1000000).toFixed(1)}M</span>
+              <span class="flex items-center gap-1"><i data-lucide="heart" style="width: 12px; height: 12px;"></i> ${(item.likes/1000).toFixed(0)}K</span>
+              <span class="badge badge-secondary" style="font-size: 10px; padding: 0px 6px;">${item.type}</span>
+            </div>
+          </div>
+        `;
+      });
+      lucide.createIcons();
+
+      // Populate Table
+      const tbody = document.querySelector('#creatorCollabTable tbody');
+      creator.collaborations.forEach(collab => {
+        const stars = '⭐'.repeat(collab.rating) + '☆'.repeat(5 - collab.rating);
+        tbody.innerHTML += `
+          <tr>
+            <td class="font-medium">${collab.brand}</td>
+            <td class="text-secondary">${collab.campaign}</td>
+            <td class="text-success font-semibold">+${collab.roi}%</td>
+            <td style="color: var(--clr-warning); letter-spacing: 2px;">${stars}</td>
+            <td class="text-muted text-sm">${collab.date}</td>
+          </tr>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

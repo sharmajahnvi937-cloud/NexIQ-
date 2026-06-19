@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Dashboard | NEXIQ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" style="background: rgba(10, 10, 26, 0.95); border-bottom: 1px solid var(--clr-border);">
+    <div class="container-lg flex justify-between items-center">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">N</div>
+        NEXIQ
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-icon btn-ghost"><i data-lucide="bell"></i></button>
+        <button class="btn btn-icon btn-ghost"><i data-lucide="search"></i></button>
+        <div class="profile-avatar" style="width: 36px; height: 36px; font-size: 14px; margin-left: 12px; cursor: pointer;">NS</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <a href="brand-dashboard.html" class="sidebar-link active">
+          <i data-lucide="layout-dashboard" class="link-icon"></i> Dashboard
+        </a>
+        <a href="analytics.html" class="sidebar-link">
+          <i data-lucide="bar-chart-2" class="link-icon"></i> Analytics
+        </a>
+        <a href="ai-modules.html" class="sidebar-link">
+          <i data-lucide="cpu" class="link-icon"></i> AI Modules
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Management</div>
+        <a href="campaigns.html" class="sidebar-link">
+          <i data-lucide="target" class="link-icon"></i> Campaigns
+        </a>
+        <a href="collaborations.html" class="sidebar-link">
+          <i data-lucide="users" class="link-icon"></i> Collaborations
+        </a>
+        <a href="products.html" class="sidebar-link">
+          <i data-lucide="package" class="link-icon"></i> Products
+        </a>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Settings</div>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="settings" class="link-icon"></i> Profile
+        </a>
+        <a href="#" class="sidebar-link">
+          <i data-lucide="credit-card" class="link-icon"></i> Billing
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="container-lg">
+        
+        <!-- Profile Header -->
+        <div class="profile-header animate-fade-in">
+          <div class="profile-info">
+            <div class="profile-avatar">NS</div>
+            <div class="profile-details">
+              <h2>NovaSkin Cosmetics</h2>
+              <div class="profile-tagline">Premium skincare powered by science</div>
+              <div class="profile-tags">
+                <span class="badge badge-primary">Beauty & Skincare</span>
+                <span class="badge badge-secondary"><i data-lucide="globe" style="width: 12px; height: 12px;"></i> novaskin.com</span>
+                <span class="badge badge-success"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Verified Brand</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-stats">
+            <div class="stat">
+              <div class="stat-value text-primary">92</div>
+              <div class="stat-label">Trust Score</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">47</div>
+              <div class="stat-label">Total Campaigns</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value text-secondary">340%</div>
+              <div class="stat-label">Avg ROI</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value text-success">$1.25M</div>
+              <div class="stat-label">Revenue Generated</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="grid grid-4 gap-6 mb-8" style="margin-bottom: 2rem;">
+          <div class="stat-card animate-fade-up" data-delay="0">
+            <div class="stat-icon purple">🛡️</div>
+            <div class="stat-value">92<span style="font-size: 1rem; color: var(--clr-text-secondary)">/100</span></div>
+            <div class="stat-label">Trust Score</div>
+            <div class="stat-change positive">↑ 5.2%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="1">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-value">89%</div>
+            <div class="stat-label">Campaign Success</div>
+            <div class="stat-change positive">↑ 3.1%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="2">
+            <div class="stat-icon teal">📊</div>
+            <div class="stat-value">340%</div>
+            <div class="stat-label">Average ROI</div>
+            <div class="stat-change positive">↑ 12.0%</div>
+          </div>
+          
+          <div class="stat-card animate-fade-up" data-delay="3">
+            <div class="stat-icon amber">💰</div>
+            <div class="stat-value">$1.25M</div>
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-change positive">↑ 18.0%</div>
+          </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-3 gap-6 mb-8" style="margin-bottom: 2rem;">
+          
+          <!-- Trust Score Section -->
+          <div class="card" style="grid-column: span 1;">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Trust Assessment</h3>
+              <a href="#" class="text-xs text-primary">View details</a>
+            </div>
+            
+            <div class="flex flex-col items-center mb-6">
+              <div class="trust-ring" id="trustRing">
+                <svg viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="trustGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#6C5CE7" />
+                      <stop offset="100%" stop-color="#00CEC9" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="ring-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="ring-fill" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="ring-value">92</div>
+                <div class="ring-label">Excellent</div>
+              </div>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Product Quality</span>
+                  <span class="font-semibold">94/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="94"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Customer Satisfaction</span>
+                  <span class="font-semibold">91/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill teal" style="width: 0%" data-target="91"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Safety Compliance</span>
+                  <span class="font-semibold">96/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="96"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Brand Reputation</span>
+                  <span class="font-semibold">88/100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill warm" style="width: 0%" data-target="88"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Revenue Growth (2025)</h3>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="brandGrowthChart"></canvas>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="grid grid-2 gap-6 mb-8" style="margin-bottom: 2rem;">
+          <!-- Product Quality Radar -->
+          <div class="card">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Product Quality Assessment</h3>
+            <div class="chart-wrapper">
+              <canvas id="productQualityChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- Campaign Performance -->
+          <div class="card">
+            <h3 class="font-semibold mb-4" style="font-family: var(--font-heading);">Campaign Performance</h3>
+            <div class="chart-wrapper">
+              <canvas id="campaignPerfChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Section: Certifications & Collabs -->
+        <div class="grid grid-3 gap-6">
+          
+          <div class="card flex flex-col gap-4">
+            <h3 class="font-semibold mb-2" style="font-family: var(--font-heading);">Verified Certifications</h3>
+            
+            <div class="flex items-center justify-between p-3 rounded-md" style="background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border);">
+              <div class="flex items-center gap-3">
+                <span style="font-size: 1.5rem;">✅</span>
+                <span class="font-medium text-sm">FDA Approved</span>
+              </div>
+              <span class="badge badge-success">Verified</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 rounded-md" style="background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border);">
+              <div class="flex items-center gap-3">
+                <span style="font-size: 1.5rem;">🐰</span>
+                <span class="font-medium text-sm">Cruelty-Free</span>
+              </div>
+              <span class="badge badge-success">Verified</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 rounded-md" style="background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border);">
+              <div class="flex items-center gap-3">
+                <span style="font-size: 1.5rem;">📋</span>
+                <span class="font-medium text-sm">ISO 9001</span>
+              </div>
+              <span class="badge badge-success">Verified</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 rounded-md" style="background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border);">
+              <div class="flex items-center gap-3">
+                <span style="font-size: 1.5rem;">🔬</span>
+                <span class="font-medium text-sm">Dermatologist Tested</span>
+              </div>
+              <span class="badge badge-success">Verified</span>
+            </div>
+            
+            <button class="btn btn-secondary w-full mt-2 justify-center">+ Add Certification</button>
+          </div>
+          
+          <div class="card" style="grid-column: span 2;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-family: var(--font-heading);">Recent Collaborations</h3>
+              <a href="#" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            
+            <div class="table-wrapper">
+              <table class="data-table" id="collabTable">
+                <thead>
+                  <tr>
+                    <th>Creator</th>
+                    <th>Campaign</th>
+                    <th>ROI</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setChartDefaults();
+      const brand = NEXIQ_DATA.brands[0];
+
+      // Init Trust Ring
+      animateTrustRing(document.getElementById('trustRing'), brand.trustScore);
+      
+      // Init Progress Bars
+      document.querySelectorAll('.progress-fill').forEach(bar => {
+        const target = bar.getAttribute('data-target');
+        setTimeout(() => { bar.style.width = target + '%'; }, 300);
+      });
+
+      // 1. Revenue Growth Chart
+      const growthCtx = document.getElementById('brandGrowthChart');
+      if (growthCtx) {
+        new Chart(growthCtx, {
+          type: 'line',
+          data: {
+            labels: brand.growth.labels,
+            datasets: [{
+              label: 'Monthly Growth (%)',
+              data: brand.growth.monthly,
+              borderColor: '#00CEC9',
+              backgroundColor: 'rgba(0, 206, 201, 0.1)',
+              borderWidth: 3,
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 2. Product Quality Radar
+      const radarCtx = document.getElementById('productQualityChart');
+      if (radarCtx) {
+        new Chart(radarCtx, {
+          type: 'radar',
+          data: {
+            labels: Object.keys(brand.productMetrics).map(k => k.charAt(0).toUpperCase() + k.slice(1)),
+            datasets: [{
+              label: 'Score',
+              data: Object.values(brand.productMetrics),
+              borderColor: '#6C5CE7',
+              backgroundColor: 'rgba(108, 92, 231, 0.2)',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: { r: { min: 0, max: 100, ticks: { display: false } } }
+          }
+        });
+      }
+
+      // 3. Campaign Performance Bar Chart
+      const campaignCtx = document.getElementById('campaignPerfChart');
+      if (campaignCtx) {
+        new Chart(campaignCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+            datasets: [{
+              label: 'Successful Campaigns',
+              data: [12, 15, 10, 5],
+              backgroundColor: '#6C5CE7',
+              borderRadius: 4
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // Populate Table
+      const tbody = document.querySelector('#collabTable tbody');
+      brand.collaborations.forEach(collab => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="font-medium">${collab.creator}</td>
+          <td class="text-secondary">${collab.campaign}</td>
+          <td class="text-success font-semibold">+${collab.roi}%</td>
+          <td><span class="badge ${collab.status === 'completed' ? 'badge-success' : 'badge-primary'}">${collab.status}</span></td>
+          <td class="text-muted text-sm">${collab.date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    });
+  </script>
+</body>
+</html>

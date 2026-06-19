@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Modules | NEXIQ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* AI Module Specific Styles */
+    .ai-loading {
+      padding: 16px;
+      color: var(--clr-secondary);
+      font-size: 14px;
+      text-align: center;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .ai-result { padding: 8px 0; }
+    .ai-result-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+
+    .ai-prediction-score { text-align: center; margin: 20px 0; }
+    .prediction-circle { 
+      display: inline-flex; flex-direction: column; align-items: center; justify-content: center; 
+      width: 120px; height: 120px; border-radius: 50%; 
+      background: rgba(108, 92, 231, 0.15); border: 3px solid var(--clr-primary); 
+    }
+    .score-number { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--clr-primary-light); }
+    .score-label { font-size: 11px; color: var(--clr-text-secondary); }
+
+    .ai-factors, .ai-breakdown, .ai-trust-metrics { margin-top: 12px; }
+    .factor-row, .breakdown-item, .trust-metric-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+    .factor-name, .breakdown-label, .trust-metric-name { flex: 1; color: var(--clr-text-secondary); }
+    .factor-bar-wrapper { flex: 2; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .factor-bar { height: 100%; border-radius: 3px; transition: width 1s ease; }
+    .factor-score, .breakdown-value, .trust-metric-val { width: 35px; text-align: right; font-weight: 600; color: var(--clr-primary-light); }
+
+    .trust-meter { flex: 2; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .trust-meter-fill { height: 100%; border-radius: 3px; background: var(--grad-success); transition: width 1s ease;}
+    .trust-trend { font-size: 11px; padding: 2px 6px; border-radius: 4px; }
+    .trust-trend.up { color: var(--clr-success); background: rgba(0,184,148,0.1); }
+    .trust-trend.stable { color: var(--clr-warning); background: rgba(253,203,110,0.1); }
+    .trust-trend.down { color: var(--clr-danger); background: rgba(255,107,107,0.1); }
+
+    .ai-roi-display { text-align: center; margin: 20px 0; }
+    .roi-big-number { font-family: var(--font-heading); font-size: 3rem; font-weight: 900; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .roi-sublabel { font-size: 13px; color: var(--clr-text-secondary); margin-top: 4px; }
+
+    .match-item { padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--clr-border); }
+    .match-pair { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px; font-weight: 600; font-size: 16px; }
+    .match-connector { color: var(--clr-primary); font-size: 18px; }
+    .match-details { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .match-score-display { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; padding: 4px 12px; border-radius: 8px; }
+    .match-score-display.excellent { background: rgba(0,184,148,0.15); color: var(--clr-success); }
+    .match-score-display.good { background: rgba(108,92,231,0.15); color: var(--clr-primary-light); }
+    .match-score-display.fair { background: rgba(253,203,110,0.15); color: var(--clr-warning); }
+    .match-factors-list { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; justify-content: flex-end; }
+
+    .sim-scenario { font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--clr-primary-light); text-align: center;}
+    .sim-impacts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .sim-impact-card { padding: 16px; background: rgba(255,255,255,0.03); border-radius: 10px; text-align: center; }
+    .sim-label { font-size: 12px; color: var(--clr-text-secondary); margin-bottom: 8px; }
+    .sim-before-after { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; }
+    .sim-before { font-size: 1.5rem; font-weight: 700; color: var(--clr-text-muted); }
+    .sim-arrow { color: var(--clr-primary); }
+    .sim-after { font-size: 1.5rem; font-weight: 700; color: var(--clr-success); }
+    .sim-risks { margin-top: 12px; }
+    .sim-risk-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+    .quality-product-name { font-family: var(--font-heading); font-size: 15px; font-weight: 600; margin-bottom: 16px; color: var(--clr-secondary); text-align: center;}
+    .quality-dimensions { margin-top: 8px; }
+    .quality-dim { margin-bottom: 12px; }
+    .quality-dim-header { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+    .quality-dim-score { font-weight: 600; color: var(--clr-primary-light); }
+
+    .stat-grid-mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+    .stat-mini { padding: 12px; background: rgba(255,255,255,0.03); border-radius: 10px; text-align: center; }
+    .stat-mini-value { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--clr-primary-light); }
+    .stat-mini-label { font-size: 11px; color: var(--clr-text-secondary); margin-top: 4px; }
+    .stat-extra { margin-top: 12px; }
+    .stat-extra-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--clr-border); }
+
+    .campaign-prediction-name { font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--clr-accent); text-align: center;}
+    .prediction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .prediction-item { padding: 14px; background: rgba(255,255,255,0.03); border-radius: 10px; text-align: center; }
+    .prediction-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .prediction-val { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--clr-text); }
+    .prediction-label { font-size: 11px; color: var(--clr-text-secondary); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" style="background: rgba(10, 10, 26, 0.95); border-bottom: 1px solid var(--clr-border);">
+    <div class="container-lg flex justify-between items-center">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">N</div>
+        NEXIQ
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-icon btn-ghost"><i data-lucide="bell"></i></button>
+        <div class="profile-avatar" style="width: 36px; height: 36px; font-size: 14px; margin-left: 12px;">AD</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <a href="index.html" class="sidebar-link">
+          <i data-lucide="layout-dashboard" class="link-icon"></i> Main Site
+        </a>
+        <a href="analytics.html" class="sidebar-link">
+          <i data-lucide="bar-chart-2" class="link-icon"></i> Analytics
+        </a>
+        <a href="ai-modules.html" class="sidebar-link active">
+          <i data-lucide="cpu" class="link-icon"></i> AI Modules
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="container-lg">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h1 class="text-3xl font-bold mb-2" style="font-family: var(--font-heading);">AI-Powered Modules</h1>
+            <p class="text-secondary">Experience NEXIQ's intelligent analysis engines</p>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="runAllAIModules()">
+              <i data-lucide="play" style="width: 16px; height: 16px; margin-right: 8px;"></i> Run All Analyses
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Modules Grid -->
+        <div class="grid grid-2 gap-6 mb-12">
+          
+          <!-- 1. Brand Success Predictor -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon purple" style="background: rgba(108,92,231,0.15); color: #a29bfe;">🚀</div>
+                <button class="btn btn-sm btn-primary" onclick="runBrandSuccessPredictor()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Brand Success Predictor</h3>
+              <p class="module-desc">Predicts the probability of a brand's success based on market data, product quality, and historical performance.</p>
+              <div id="ai-output-brand-success" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Creator ROI Analyzer -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon teal" style="background: rgba(0,206,201,0.15); color: #00CEC9;">📊</div>
+                <button class="btn btn-sm btn-primary" onclick="runCreatorROIAnalyzer()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Creator ROI Analyzer</h3>
+              <p class="module-desc">Analyzes and predicts the ROI a creator can deliver based on audience data, engagement patterns, and conversion history.</p>
+              <div id="ai-output-creator-roi" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Audience Trust Analyzer -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon green" style="background: rgba(0,184,148,0.15); color: #00B894;">🛡️</div>
+                <button class="btn btn-sm btn-primary" onclick="runAudienceTrustAnalyzer()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Audience Trust Analyzer</h3>
+              <p class="module-desc">Measures the trust level between a creator and their audience through sentiment analysis and engagement patterns.</p>
+              <div id="ai-output-audience-trust" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Compatibility Engine -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon pink" style="background: rgba(253,121,168,0.15); color: #FD79A8;">🔗</div>
+                <button class="btn btn-sm btn-primary" onclick="runCompatibilityEngine()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Compatibility Engine</h3>
+              <p class="module-desc">Matches brands with creators based on audience alignment, niche relevance, and performance compatibility.</p>
+              <div id="ai-output-compatibility" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Product Quality Assessment -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon success" style="background: rgba(0,184,148,0.15); color: #00B894;">✅</div>
+                <button class="btn btn-sm btn-primary" onclick="runProductQualityAssessment()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Product Quality Engine</h3>
+              <p class="module-desc">Evaluates product quality through multi-dimensional scoring based on testing reports, certifications, and feedback.</p>
+              <div id="ai-output-product-quality" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Reputation Impact Simulator -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon accent" style="background: rgba(253,121,168,0.15); color: #FD79A8;">🎯</div>
+                <button class="btn btn-sm btn-primary" onclick="runReputationSimulator()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Reputation Simulator</h3>
+              <p class="module-desc">Simulates the potential impact of a collaboration on both brand and creator reputation before commitment.</p>
+              <div id="ai-output-reputation" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Statistical Performance Analyzer -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon amber" style="background: rgba(253,203,110,0.15); color: #FDCB6E;">📈</div>
+                <button class="btn btn-sm btn-primary" onclick="runStatisticalAnalyzer()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Statistical Analyzer</h3>
+              <p class="module-desc">Provides deep statistical analysis of campaign performance using regression models and trend detection.</p>
+              <div id="ai-output-statistical" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Campaign Outcome Predictor -->
+          <div class="module-card">
+            <div class="module-content">
+              <div class="flex items-start justify-between mb-2">
+                <div class="module-icon purple" style="background: rgba(108,92,231,0.15); color: #a29bfe;">🔮</div>
+                <button class="btn btn-sm btn-primary" onclick="runCampaignPredictor()">Run Analysis</button>
+              </div>
+              <h3 class="module-title">Campaign Predictor</h3>
+              <p class="module-desc">Predicts campaign outcomes before launch using historical data, market conditions, and synergy metrics.</p>
+              <div id="ai-output-campaign" class="module-output text-center text-muted" style="border: 1px dashed var(--clr-border); background: rgba(0,0,0,0.2);">
+                Click "Run Analysis" to see AI output...
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Compatibility Matching Results -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Brand-Creator Compatibility Results</h2>
+          <div id="compatibility-list" class="flex flex-col gap-4">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/ai-modules.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render Compatibility Matches from Data
+      const compList = document.getElementById('compatibility-list');
+      const matches = NEXIQ_DATA.compatibilityMatches;
+      
+      matches.forEach(m => {
+        let badgeColor = m.riskLevel === 'Low' ? 'badge-success' : (m.riskLevel === 'Medium' ? 'badge-warning' : 'badge-danger');
+        let scoreClass = m.score >= 90 ? 'excellent' : (m.score >= 80 ? 'good' : 'fair');
+        
+        compList.innerHTML += `
+          <div class="match-card">
+            <div style="flex: 1; text-align: center;">
+              <div class="profile-avatar mx-auto mb-2" style="width: 60px; height: 60px; font-size: 20px;">${m.brand.logo}</div>
+              <div class="font-bold">${m.brand.name}</div>
+              <div class="text-xs text-secondary">${m.brand.category}</div>
+            </div>
+            
+            <div class="match-score">
+              <div class="score-value ${scoreClass}" style="background: none; padding: 0;">${m.score}%</div>
+              <div class="score-label">Match Score</div>
+            </div>
+            
+            <div style="flex: 1; text-align: center;">
+              <div class="profile-avatar mx-auto mb-2" style="width: 60px; height: 60px; font-size: 20px; background: var(--grad-accent);">${m.creator.avatar}</div>
+              <div class="font-bold">${m.creator.name}</div>
+              <div class="text-xs text-secondary">${m.creator.niche}</div>
+            </div>
+            
+            <div style="flex: 2; padding-left: 20px; border-left: 1px solid var(--clr-border);">
+              <div class="mb-2">
+                <div class="flex justify-between text-xs mb-1"><span>Audience Match</span> <span>${m.audienceMatch}%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: ${m.audienceMatch}%"></div></div>
+              </div>
+              <div class="mb-2">
+                <div class="flex justify-between text-xs mb-1"><span>Niche Alignment</span> <span>${m.nicheAlignment}%</span></div>
+                <div class="progress-bar"><div class="progress-fill teal" style="width: ${m.nicheAlignment}%"></div></div>
+              </div>
+              <div class="mb-3">
+                <div class="flex justify-between text-xs mb-1"><span>ROI Potential</span> <span>${m.roiPotential}%</span></div>
+                <div class="progress-bar"><div class="progress-fill accent" style="width: ${m.roiPotential}%"></div></div>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="badge ${badgeColor}">${m.riskLevel} Risk</span>
+                <span class="text-secondary">${m.recommendation}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
